@@ -42,9 +42,5 @@ class BowlingTest {
             assertEquals(Integer.valueOf(item[0]), bowling.score(item[1]));
         }
 
-
-
-
-
     }
 }
