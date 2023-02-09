@@ -10,9 +10,11 @@ import java.util.Scanner;
 
 public class Bowling {
 
-    private static final String COMMA_DELIMITER = ",";
+    private static final String SPACE_DELIMITER = " ";
+    private static final int MAX_PINS = 10;
     private static final int MAX_FRAME = 10;
     private static final int FIRST_FRAME = 0;
+    private static final int SECOND_FRAME = 1;
     private static final int LAST_FRAME = MAX_FRAME-1;
     private static final char SPARE = '/';
     private static final char STRIKE = 'X';
@@ -47,9 +49,9 @@ public class Bowling {
             case '9':
                 return 9;
             case STRIKE:
-                return 10;
+                return MAX_PINS;
             case SPARE:
-                return 10;
+                return MAX_PINS;
             default:
                 return 0;
         }
@@ -77,7 +79,7 @@ public class Bowling {
             strikeMode[i] = 0;
         }
         //use string.split to break a give string around matches of space
-        String[] frames = frameStr.split(" ");
+        String[] frames = frameStr.split(SPACE_DELIMITER);
 
         //for each frames check the first and second character
         for (int i=0; i<frames.length; i++){
@@ -85,7 +87,7 @@ public class Bowling {
             char firstChar = frames[i].charAt(0);
 
             // if spareFlag, add score to previous frame
-            if (i > 0) { // skip the first one
+            if (i > FIRST_FRAME) { // skip the first one
                 if (spareFlag[i - 1]) {
                     frameScore[i - 1] += convert2value(firstChar);
                 }
@@ -93,22 +95,22 @@ public class Bowling {
 
             // if 'X', check first character only
             if (firstChar == STRIKE) {
-                frameScore[i] = 10;
+                frameScore[i] = MAX_PINS;
                 strikeMode[i] = 2;
                 // check previous 2 frame's strikeMode
-                if (i > 0){ // skip the first frame
-                    if (i == 1) {
+                if (i > FIRST_FRAME){ // skip the first frame
+                    if (i == SECOND_FRAME) { // handle second frame
                         if (strikeMode[i-1] > 0) {
-                            frameScore[i-1] += 10;
+                            frameScore[i-1] += MAX_PINS;
                             strikeMode[i-1] -= 1;
                         }
                     } else { // i must greater than or equal 2
                         if (strikeMode[i-1] > 0) {
-                            frameScore[i-1] += 10;
+                            frameScore[i-1] += MAX_PINS;
                             strikeMode[i-1] -= 1;
                         }
                         if (strikeMode[i-2] > 0) {
-                            frameScore[i-2] += 10;
+                            frameScore[i-2] += MAX_PINS;
                             strikeMode[i-2] -= 1;
                         }
                     }
@@ -118,8 +120,8 @@ public class Bowling {
                 frameScore[i] = convert2value(firstChar);
 
                 // first value need to check previous two frame
-                if (i > 0){ // skip the first frame
-                    if (i == 1) {
+                if (i > FIRST_FRAME){ // skip the first frame
+                    if (i == SECOND_FRAME) { //handle second frame
                         if (strikeMode[i-1] > 0) {
                             frameScore[i-1] += convert2value(firstChar);;
                             strikeMode[i-1] -= 1;
@@ -151,7 +153,7 @@ public class Bowling {
                 // if secondChar is SPARE, frameScore is 10 and spareFlag to true
                 // else frameScore is first + second value
                 if (secondChar == SPARE){
-                    frameScore[i]=10;
+                    frameScore[i]=MAX_PINS;
                     spareFlag[i] = true;
                     if (i == LAST_FRAME) {
                         char thirdChar = frames[i].charAt(2);

@@ -7,7 +7,6 @@
     <list default="true" id="2cfa0d56-778c-4ddc-9a31-2b31dd05c631" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Bowling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Bowling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/testcases.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/testcases.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +118,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/Bowling.java</url>
-          <line>30</line>
+          <line>32</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
