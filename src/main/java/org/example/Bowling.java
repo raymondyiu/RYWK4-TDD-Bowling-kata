@@ -116,7 +116,33 @@ public class Bowling {
             }  else {
 
                 frameScore[i] = convert2value(firstChar);
+
+                // first value need to check previous two frame
+                if (i > 0){ // skip the first frame
+                    if (i == 1) {
+                        if (strikeMode[i-1] > 0) {
+                            frameScore[i-1] += convert2value(firstChar);;
+                            strikeMode[i-1] -= 1;
+                        }
+                    } else { // i must greater than or equal 2
+                        if (strikeMode[i-1] > 0) {
+                            frameScore[i-1] += convert2value(firstChar);;
+                            strikeMode[i-1] -= 1;
+                        }
+                        if (strikeMode[i-2] > 0) {
+                            frameScore[i-2] += convert2value(firstChar);;
+                            strikeMode[i-2] -= 1;
+                        }
+                    }
+                }
                 char secondChar = frames[i].charAt(1);
+                // second value need to check for previous one only
+                if (i > 0){// skip the first frame
+                    if (strikeMode[i-1] > 0) {
+                        frameScore[i-1] += convert2value(secondChar);;
+                        strikeMode[i-1] -= 1;
+                    }
+                }
                 // if secondChar is SPARE, frameScore is 10 and spareFlag to true
                 // else frameScore is first + second value
                 if (secondChar == SPARE){
