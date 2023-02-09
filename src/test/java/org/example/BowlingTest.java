@@ -38,7 +38,6 @@ class BowlingTest {
         Bowling bowling = new Bowling();
 
         for (String[] item : csvTestCases) {
-            System.out.println(item[0] + "\t" + item[1]);
             assertEquals(Integer.valueOf(item[0]), bowling.score(item[1]));
         }
 

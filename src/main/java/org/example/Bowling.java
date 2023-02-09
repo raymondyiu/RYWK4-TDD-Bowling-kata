@@ -11,6 +11,12 @@ import java.util.Scanner;
 public class Bowling {
 
     private static final String COMMA_DELIMITER = ",";
+    private static final int MAX_FRAME = 10;
+    private static final int FIRST_FRAME = 0;
+    private static final int LAST_FRAME = MAX_FRAME-1;
+    private static final char SPARE = '/';
+    private static final char STRIKE = 'X';
+    private static final char MISS = '-';
     private List<List<String>> csvData;
     private int convert2value(char inputChar){
         // if 'X', frameScore[0][i]=10
@@ -20,7 +26,7 @@ public class Bowling {
         // other return -1
         // use switch statement
         switch (inputChar) {
-            case '-':
+            case MISS:
                 return 0;
             case '1':
                 return 1;
@@ -40,28 +46,35 @@ public class Bowling {
                 return 8;
             case '9':
                 return 9;
-            case 'X':
+            case STRIKE:
                 return 10;
-            case '/':
+            case SPARE:
                 return 10;
             default:
                 return 0;
         }
     }
     public int score (String frameStr){
-        // create spare Flag store the state
-        boolean spareFlag=false;
-        // strikeMode = 0 (no previous strike), 1 (add score to previous), 2 (add score to previous 2)
-        int strikeMode=0;
+        // create spare flag for each frame
+        boolean[] spareFlag = new boolean[MAX_FRAME+2];
+
+        // strikeMode = 0 (no previous strike), 1 (add score 1 time), 2 (add score 2 times)
+        int[] strikeMode = new int[MAX_FRAME+2];
+
+
+
         // create a 3 x 10 two dimensions array to store the scores
-        int[][] frameScore = new int[3][10];
+        int[] frameScore = new int[MAX_FRAME+2];
         // store the total score
         int totalScore = 0;
-        // initialize two dimensions array
-        for (int i=0; i<3; i++){
-            for (int j=0; j<10; j++){
-                frameScore[i][j] = 0;
-            }
+        // initialize frameScore to zero
+        for (int i=0; i<frameScore.length; i++){
+                frameScore[i] = 0;
+        }
+        // initialize spare flag and strike flag
+        for (int i=0; i<spareFlag.length; i++){
+            spareFlag[i] = false;
+            strikeMode[i] = 0;
         }
         //use string.split to break a give string around matches of space
         String[] frames = frameStr.split(" ");
@@ -71,21 +84,57 @@ public class Bowling {
             // use String.charAt() to get character
             char firstChar = frames[i].charAt(0);
 
-            // if 'X', check first character only
-            if (firstChar == 'X') {
-                frameScore[0][i] = 10;
-            }  else {
-
-                frameScore[0][i] = convert2value(firstChar);
-                char secondChar = frames[i].charAt(1);
-                frameScore[0][i] += convert2value(secondChar);
+            // if spareFlag, add score to previous frame
+            if (i > 0) { // skip the first one
+                if (spareFlag[i - 1]) {
+                    frameScore[i - 1] += convert2value(firstChar);
+                }
             }
 
-            // if strikeMode
+            // if 'X', check first character only
+            if (firstChar == STRIKE) {
+                frameScore[i] = 10;
+                strikeMode[i] = 2;
+                // check previous 2 frame's strikeMode
+                if (i > 0){ // skip the first frame
+                    if (i == 1) {
+                        if (strikeMode[i-1] > 0) {
+                            frameScore[i-1] += 10;
+                            strikeMode[i-1] -= 1;
+                        }
+                    } else { // i must greater than or equal 2
+                        if (strikeMode[i-1] > 0) {
+                            frameScore[i-1] += 10;
+                            strikeMode[i-1] -= 1;
+                        }
+                        if (strikeMode[i-2] > 0) {
+                            frameScore[i-2] += 10;
+                            strikeMode[i-2] -= 1;
+                        }
+                    }
+                }
+            }  else {
 
-            // if spareFlag = true, add score to previous frame
+                frameScore[i] = convert2value(firstChar);
+                char secondChar = frames[i].charAt(1);
+                // if secondChar is SPARE, frameScore is 10 and spareFlag to true
+                // else frameScore is first + second value
+                if (secondChar == SPARE){
+                    frameScore[i]=10;
+                    spareFlag[i] = true;
+                    if (i == LAST_FRAME) {
+                        char thirdChar = frames[i].charAt(2);
+                        frameScore[i] += convert2value(thirdChar);
+                    }
+                } else {
+                    frameScore[i] += convert2value(secondChar);
+                }
+            }
 
-            totalScore += frameScore[0][i] + frameScore[1][i] + frameScore[2][i];
+        }
+
+        for (int i=0; i<MAX_FRAME; i++){
+            totalScore += frameScore[i];
         }
 
         return totalScore;
