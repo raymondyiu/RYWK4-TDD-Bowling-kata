@@ -139,7 +139,12 @@ public class Bowling {
                 // second value need to check for previous one only
                 if (i > 0){// skip the first frame
                     if (strikeMode[i-1] > 0) {
-                        frameScore[i-1] += convert2value(secondChar);;
+                        if (secondChar == SPARE) {
+                            //revert the score added in the first roll of this frame
+                            frameScore[i - 1] += convert2value(secondChar) - convert2value(firstChar);
+                        }else {
+                            frameScore[i-1] += convert2value(secondChar);
+                        }
                         strikeMode[i-1] -= 1;
                     }
                 }
@@ -156,7 +161,6 @@ public class Bowling {
                     frameScore[i] += convert2value(secondChar);
                 }
             }
-
         }
 
         // sum of MAX_FRAME's frameScore
