@@ -27,34 +27,21 @@ public class Bowling {
         // if [1..9] frameScore[0][i]=no of pins
         // other return -1
         // use switch statement
-        switch (inputChar) {
-            case MISS:
-                return 0;
-            case '1':
-                return 1;
-            case '2':
-                return 2;
-            case '3':
-                return 3;
-            case '4':
-                return 4;
-            case '5':
-                return 5;
-            case '6':
-                return 6;
-            case '7':
-                return 7;
-            case '8':
-                return 8;
-            case '9':
-                return 9;
-            case STRIKE:
-                return MAX_PINS;
-            case SPARE:
-                return MAX_PINS;
-            default:
-                return 0;
-        }
+        return switch (inputChar) {
+            case MISS -> 0;
+            case '1' -> 1;
+            case '2' -> 2;
+            case '3' -> 3;
+            case '4' -> 4;
+            case '5' -> 5;
+            case '6' -> 6;
+            case '7' -> 7;
+            case '8' -> 8;
+            case '9' -> 9;
+            case STRIKE -> MAX_PINS;
+            case SPARE -> MAX_PINS;
+            default -> 0;
+        };
     }
     public int score (String frameStr){
         // create spare flag for each frame
