@@ -5,7 +5,7 @@ https://codingdojo.org/kata/Bowling/
 
 
 ## TDD Approaches
- Solve the simple cases which exclude all strike and spare, 
+1. Solve the simple cases which exclude all strike and spare, 
 add all the characters [1..9] and '-'=0 to produce the total score. <br>
 
     `<total score>, <score of each frame>`<br>
@@ -14,10 +14,10 @@ add all the characters [1..9] and '-'=0 to produce the total score. <br>
     `20,-2 -2 -2 -2 -2 -2 -2 -2 -2 -2`<br>
     `90,9- 9- 9- 9- 9- 9- 9- 9- 9- 9-`<br>
 
-   2. handle spare cases<br>
+2. handle spare cases<br>
        take below test case for example:<br>
        `116,1/ 1/ 1/ 1/ 1/ 2/ 2/ 2/ 2/ 2/2`<br>
-   - frist frame<br>
+- frist frame<br>
       Score of 1st frame 10 and other are zero<br>
       
 | 1st score | 2nd | 3rd | 4th | 5th | 6th | 7th | 8th | 9th | 10th |
