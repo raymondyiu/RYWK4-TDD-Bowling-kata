@@ -10,9 +10,21 @@ add all the characters [1..9] and '-'=0 to produce the total score. <br>
 
     `<total score>, <score of each frame>`<br>
     `10,1- 1- 1- 1- 1- 1- 1- 1- 1- 1-`<br>
+
+| 1st frame | 2nd | 3rd | 4th | 5th | 6th | 7th | 8th | 9th | 10th |
+|-----------|-----|-----|-----|-----|-----|-----|-----|-----|------|
+| 1         | 1   | 1   | 1   | 1   | 1   | 1   | 1   | 1   | 1    |
+
+Total score is 10
+
     `20,11 11 11 11 11 11 11 11 11 11`<br>
-    `20,-2 -2 -2 -2 -2 -2 -2 -2 -2 -2`<br>
-    `90,9- 9- 9- 9- 9- 9- 9- 9- 9- 9-`<br>
+
+| 1st frame | 2nd | 3rd | 4th | 5th | 6th | 7th | 8th | 9th | 10th |
+|-----------|-----|-----|-----|-----|-----|-----|-----|-----|------|
+| 2         | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2    |
+
+Total score is 20
+
 
 2. handle spare cases<br>
        take below test case for example:<br>
@@ -38,6 +50,8 @@ if 10th frame is a spare, add the third roll<br>
 | 1st score | 2nd | 3rd | 4th | 5th | 6th | 7th | 8th | 9th | 10th |
 |-----------|-----|-----|-----|-----|-----|-----|-----|-----|------|
 | 11        | 11  | 11  | 11  | 12  | 12  | 12  | 12  | 12  | 12   |
+
+Total score is 116
 
 3. handle strike cases<br>
     take below case for example<br>
@@ -74,3 +88,5 @@ if 10th frame is a spare, add the third roll<br>
 | 1st frame | 2nd | 3rd | 4th | 5th | 6th | 7th | 8th | 9th | 10th | 11th(ignored) | 12th(ignored) |
 |-----------|-----|-----|-----|-----|-----|-----|-----|-----|------|---------------|---------------|
 | 30        | 30  | 30  | 30  | 30  | 30  | 30  | 30  | 30  | 30   | 20            | 10            |
+
+Total score is 300.
