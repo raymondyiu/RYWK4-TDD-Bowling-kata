@@ -1,7 +1,7 @@
 # Bowling Game Kata
 
 ## Problem Description
-https://codingdojo.org/kata/Bowling/
+[Bowling Game Kata](https://codingdojo.org/kata/Bowling/)
 
 
 ## TDD Approaches

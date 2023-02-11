@@ -152,7 +152,7 @@ public class Bowling {
             }
         }
 
-        // sum of MAX_FRAME's frameScore
+        // sum of MAX_FRAME's frameScore only
         for (int i=0; i<MAX_FRAME; i++){
             totalScore += frameScore[i];
         }
